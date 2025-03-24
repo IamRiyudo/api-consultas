@@ -23,7 +23,6 @@ public class ConsultaService {
     }
 
     public Consulta agendarConsulta(Consulta consulta) {
-        // ✅ Validação: paciente já tem consulta no mesmo horário?
         List<Consulta> consultasNoHorario = consultaRepository.findByPacienteAndDataAndHorario(
                 consulta.getPaciente(), consulta.getData(), consulta.getHorario()
         );
@@ -32,7 +31,6 @@ public class ConsultaService {
             throw new RuntimeException("Erro: Paciente já tem uma consulta agendada neste horário.");
         }
 
-        // ✅ Definir status padrão como "Agendada"
         consulta.setStatus("Agendada");
 
         return consultaRepository.save(consulta);
